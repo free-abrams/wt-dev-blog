@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
@@ -105,20 +106,22 @@ month_map = {
 }
 
 if __name__ == '__main__':
-    developmentModel = DevelopmentModel()
-    url = [
-        "https://warthunder.com/en/news/?tags=Development",
-        "https://warthunder.com/zh/news/?tags=开发",
-    ]
-    langs = [
-        "en",
-        "zh"
-    ]
-    devs = []
-    for k, u in enumerate(url):
-        dev = run(u)
-        for d in dev:
-            d["lang"] = langs[k]
-        devs += dev
-    for dev in devs:
-        developmentModel.firstOrCreate(dev,dev)
+    while True:
+        developmentModel = DevelopmentModel()
+        url = [
+            "https://warthunder.com/en/news/?tags=Development",
+            "https://warthunder.com/zh/news/?tags=开发",
+        ]
+        langs = [
+            "en",
+            "zh"
+        ]
+        devs = []
+        for k, u in enumerate(url):
+            dev = run(u)
+            for d in dev:
+                d["lang"] = langs[k]
+            devs += dev
+        for dev in devs:
+            developmentModel.firstOrCreate(dev, dev)
+        time.sleep(60)  # 休眠60秒
