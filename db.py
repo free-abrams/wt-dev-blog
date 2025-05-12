@@ -8,13 +8,14 @@ DB_PATH = pathlib.Path.joinpath(pathlib.Path(__file__).parent)
 class DevelopmentModel:
     """Development 表的基础模型封装"""
 
-    def __init__(self, db_path: str = DB_PATH.joinpath("wt.sqlite3")):
+    def __init__(self, db_path: str = DB_PATH.joinpath("db/wt.sqlite3")):
         """初始化模型，连接到数据库"""
         self.db_path = db_path
         self._initialize_table()
 
     def _get_connection(self) -> sqlite3.Connection:
         """获取数据库连接"""
+        q = sqlite3.connect(self.db_path)
         return sqlite3.connect(self.db_path)
 
     def _initialize_table(self):

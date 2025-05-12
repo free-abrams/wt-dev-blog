@@ -1,8 +1,8 @@
 name: "wt-dev-blog"
 services:
     wt:
-      image: "alex78218/wt-dev-blog"
+      image: "alex78218/wt-dev-blog:latest"
       container_name: "wt-dev-blog"
       restart: unless-stopped
       volumes:
-        - ./wt.sqlite3:/app/wt.sqlite3
+        - ./db:/app/db
